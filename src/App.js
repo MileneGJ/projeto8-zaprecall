@@ -1,5 +1,13 @@
+import Welcome from './components/Welcome'
+import Header from './components/Header'
+import Content from './components/Content'
+
 export default function App () {
     return(
-    <h1> FUNCIONOU?????</h1>
+        <>
+            <Welcome />
+            <Header />
+            <Content />
+        </>
     )
 }

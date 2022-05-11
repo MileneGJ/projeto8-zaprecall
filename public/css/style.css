@@ -1,0 +1,87 @@
+body{
+    font-family: 'Recursive',monospace;
+    background-color: #FB6B6B;
+}
+h1{
+    font-family: 'Righteous',cursive;
+    color:#FFFFFF;
+    font-size:36px;
+    margin:40px 0 40px 30px;
+}
+button{
+    font-family: 'Recursive',monospace;
+}
+h2{
+    font-weight: 1000;
+}
+
+.welcome{
+    background-color: #FB6B6B;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: 1;
+}
+.welcome img{
+    height:150px;
+}
+.welcome button{
+    background-color: #FFFFFF;
+    border:solid 1px #D70900;
+    color:#D70900;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    font-size: 18px;
+    width:250px;
+    height:56px;
+    border-radius: 5px;
+}
+
+span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header img{
+    width:52px;
+    height:60px;
+}
+.content{
+    width:100%;
+}
+.questions{
+    display:flex;
+    justify-content: center;
+    margin-top:25px;
+}
+li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 22px;
+    border-radius: 5px;
+    width:300px;
+    height:65px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    margin-bottom:5px;
+}
+li ion-icon{
+    font-size: 28px;
+}
+.progressBar{
+    width:100%;
+    height:70px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:fixed;
+    bottom:0;
+    left:0;
+}
