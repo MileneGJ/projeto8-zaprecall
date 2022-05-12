@@ -6,7 +6,7 @@ h1{
     font-family: 'Righteous',cursive;
     color:#FFFFFF;
     font-size:36px;
-    margin:40px 0 40px 30px;
+    margin:40px 0;
 }
 button{
     font-family: 'Recursive',monospace;
@@ -43,6 +43,7 @@ h2{
 }
 
 span{
+    width:100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,10 +51,12 @@ span{
 .header img{
     width:52px;
     height:60px;
+    margin-right: 30px;
 }
 .container{
     display:flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width:100%;
     margin-bottom:120px;
 }
@@ -67,14 +70,46 @@ li{
     padding:0 22px;
     border-radius: 5px;
     width:300px;
-    height:65px;
     background-color: #FFFFFF;
     box-shadow: 0 2px 4px rgba(0,0,0,0.25);
     margin-bottom:28px;
+    box-sizing: border-box;
 }
 li ion-icon{
     font-size: 28px;
     --ionicon-stroke-width: 50px;
+}
+li button{
+    width:84px;
+    height:36px;
+    color:#FFFFFF;
+    border-radius: 5px;
+    border:none;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+li span{
+    justify-content: space-between;
+}
+
+.fechada{
+    height:65px;
+}
+.aberta{
+    padding:20px 15px 8px 15px;
+    height:130px;
+    flex-direction: column;
+    align-items: flex-start;
+    position:relative;
+}
+.aberta img{
+    width:30px;
+    height:20px;
+    position: absolute;
+    bottom:8px;
+    right:15px;
 }
 .progressBar{
     width:100%;

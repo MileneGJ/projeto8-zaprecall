@@ -6,12 +6,11 @@ export default function App () {
     const [showScreen,setShowScreen] = React.useState(false);
 
     function appearContent(){
-        setShowScreen(true)
+        setShowScreen(true);
     }
     return(
         <>
             {showScreen? <Content /> :<Welcome content={appearContent}/>}
-            
         </>
     )
 }
