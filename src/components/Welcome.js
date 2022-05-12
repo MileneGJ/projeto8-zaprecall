@@ -1,15 +1,10 @@
-import React from "react";
+export default function Welcome ({content}) {
 
-export default function Welcome () {
-    const [display,setDisplay] = React.useState("flex");
-    function appearContent(){
-        setDisplay("none");
-    }
     return(
-        <div style={{display:display}} className="welcome">
+        <div className="welcome">
             <img src="./images/image 1.png" alt="" />
             <h1>ZapRecall</h1>
-            <button onClick={appearContent}>Iniciar Recall!</button>
+            <button onClick={content}>Iniciar Recall!</button>
         </div>
     )
 }

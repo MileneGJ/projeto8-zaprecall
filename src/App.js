@@ -1,13 +1,17 @@
 import Welcome from './components/Welcome'
-import Header from './components/Header'
 import Content from './components/Content'
+import React from 'react'
 
 export default function App () {
+    const [showScreen,setShowScreen] = React.useState(false);
+
+    function appearContent(){
+        setShowScreen(true)
+    }
     return(
         <>
-            <Welcome />
-            <Header />
-            <Content />
+            {showScreen? <Content /> :<Welcome content={appearContent}/>}
+            
         </>
     )
 }
