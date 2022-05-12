@@ -28,14 +28,14 @@ export default function Questions() {
     }];
 
     const infoButtons = [{
-        name:"Não lembrei",
-        color:"#FF3030"
-    },{
-        name:"Quase não lembrei",
-        color:"#FF922E"
-    },{
-        name:"Zap!",
-        color:"#2FBE34"
+        name: "Não lembrei",
+        color: "#FF3030"
+    }, {
+        name: "Quase não lembrei",
+        color: "#FF922E"
+    }, {
+        name: "Zap!",
+        color: "#2FBE34"
     }];
 
     function comparador() {
@@ -45,37 +45,90 @@ export default function Questions() {
 
 
     function Question({ index, question, answer }) {
-        const [showCard, setShowCard] = React.useState(false);
-        const [showAnswer, setShowAnswer] = React.useState(false);
+        const [statusCard, setStatusCard] = React.useState({
+            showCard:false,
+            showAnswer:false,
+            closed:false,
+            zap:false,
+            almost:false
+        });
+
         function appearQuestion() {
-            setShowCard(true);
+            setStatusCard(previousState => ({ ...previousState, showCard:true }));
         }
 
         function appearAnswer() {
-            setShowAnswer(true);
+            setStatusCard(previousState => ({ ...previousState, showAnswer:true }));
+        }
+
+        function closeCard(type) {
+            switch (type) {
+                case 0:
+                    setStatusCard(previousState => ({ ...previousState, 
+                        showCard:false, 
+                        showAnswer:false,
+                        closed:true }));
+                    break;
+                case 1:
+                    setStatusCard(previousState => ({ ...previousState, 
+                        showCard:false, 
+                        showAnswer:false,
+                        closed:true,
+                        zap:true,
+                        almost:true }));
+                    break;
+                case 2:
+                    setStatusCard(previousState => ({ ...previousState, 
+                        showCard:false, 
+                        showAnswer:false,
+                        closed:true,
+                        zap:true }));
+                    break;
+                default:
+                    break;
+            }
         }
 
         return (
-            <li className={showCard?"aberta":"fechada"} onClick={appearQuestion}>
-                {showCard ?
-                    showAnswer?
-                    <>
-                    <p>{answer}</p>
-                    <span>
-                        {infoButtons.map(button =>
-                            <button style={{background:button.color}}>{button.name}</button>)}
-                    </span>
-                    </>
+            <li className={statusCard.showCard ? "aberta" : "fechada"} >
+                {statusCard.showCard ?
+                    statusCard.showAnswer ?
+                        <>
+                            <p>{answer}</p>
+                            <span>
+                                {infoButtons.map((button, index) =>
+                                    <button key={index} onClick={() => closeCard(index)} style={{ background: button.color }}>{button.name}</button>)}
+                            </span>
+                        </>
+                        :
+                        <>
+                            <p>{question}</p>
+                            <img onClick={appearAnswer} src="./images/Vector.png" alt="" />
+                        </>
                     :
-                    <>
-                        <p>{question}</p>
-                        <img onClick={appearAnswer} src="./images/Vector.png" alt="" />
-                    </>
-                    :
-                    <>
-                        <h2>Pergunta {index + 1}</h2>
-                        <ion-icon name="play-outline"></ion-icon>
-                    </>}
+                    statusCard.closed ?
+                    statusCard.zap ?
+                    statusCard.almost ?
+                                <>
+                                    <h2 className="answered" style={{ color: "#FF922E" }}>Pergunta {index + 1}</h2>
+                                    <ion-icon name="help-circle"></ion-icon>
+                                </>
+                                :
+                                <>
+                                    <h2 className="answered" style={{ color: "#2FBE34" }}>Pergunta {index + 1}</h2>
+                                    <ion-icon name="checkmark-circle"></ion-icon>
+                                </>
+                            :
+                            <>
+                                <h2 className="answered" style={{ color: "#FF3030" }}>Pergunta {index + 1}</h2>
+                                <ion-icon name="close-circle"></ion-icon>
+                            </>
+                        :
+                        <>
+                            <h2 onClick={appearQuestion}>Pergunta {index + 1}</h2>
+                            <ion-icon onClick={appearQuestion} name="play-outline"></ion-icon>
+                        </>
+                }
             </li>
         )
     }

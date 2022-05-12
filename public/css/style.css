@@ -111,6 +111,19 @@ li span{
     bottom:8px;
     right:15px;
 }
+.answered{
+    text-decoration: line-through;
+}
+
+ion-icon[name="help-circle"] {
+    color:#FF922E;
+}
+ion-icon[name="checkmark-circle"] {
+    color:#2FBE34;
+}
+ion-icon[name="close-circle"] {
+    color:#FF3030;
+}
 .progressBar{
     width:100%;
     height:70px;
