@@ -116,12 +116,15 @@ li span{
 }
 
 ion-icon[name="help-circle"] {
+    font-size: 28px;
     color:#FF922E;
 }
 ion-icon[name="checkmark-circle"] {
+    font-size: 28px;
     color:#2FBE34;
 }
 ion-icon[name="close-circle"] {
+    font-size: 28px;
     color:#FF3030;
 }
 .progressBar{
@@ -129,7 +132,8 @@ ion-icon[name="close-circle"] {
     height:70px;
     background-color: #FFFFFF;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
     position:fixed;
     bottom:0;
