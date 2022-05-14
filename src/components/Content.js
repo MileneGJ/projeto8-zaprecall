@@ -3,9 +3,7 @@ import ProgressBar from './ProgressBar'
 import Header from './Header'
 import React from 'react'
 
-export default function Content () {
-    const[counter,setCounter] = React.useState(0);
-
+export default function Content() {
     const deck = [{
         question: "O que é JSX?",
         answer: "Uma extensão de linguagem do JavaScript"
@@ -32,38 +30,54 @@ export default function Content () {
         answer: "Dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
     }];
 
-    const [trackedProgress,setTrackedProgress] = React.useState([])
+    const [trackedProgress, setTrackedProgress] = React.useState([])
+    let progressArray = []
+    const [finalResult, setFinalResult] = React.useState("")
 
-    function addProgress (type) {
-        switch(type){
+    function addProgress(type) {
+        switch (type) {
             case "wrong":
-                setTrackedProgress([...trackedProgress,"close-circle"]);
+                progressArray=[...trackedProgress,"close-circle"];
+                setTrackedProgress(progressArray);
+                verifyFinal()
                 break
             case "almost":
-                setTrackedProgress([...trackedProgress,"help-circle"]);
+                progressArray=[...trackedProgress,"help-circle"];
+                setTrackedProgress(progressArray);
+                verifyFinal()
                 break
             case "right":
-                setTrackedProgress([...trackedProgress,"checkmark-circle"]);
+                progressArray=[...trackedProgress,"checkmark-circle"];
+                setTrackedProgress(progressArray);
+                verifyFinal()
                 break
             default:
                 break
         }
     }
 
+    function verifyFinal() {
+        if (progressArray.length === deck.length && progressArray.includes("close-circle")) {
+            setFinalResult("negative");
+        }
+        if (progressArray.length === deck.length && !progressArray.includes("close-circle")) {
+            setFinalResult("positive");
+        }
+    }
+
+
     return (
         <div className="container">
             <Header />
-            <Questions 
-            progress={addProgress}
-            setCounter={setCounter} 
-            counter={counter} 
-            deck={deck} />
-            <ProgressBar> 
-                <p>{counter}/{deck.length} CONCLUÍDOS </p>
+            <Questions
+                progress={addProgress}
+                deck={deck} />
+            <ProgressBar result={finalResult}>
+                <p>{trackedProgress.length}/{deck.length} CONCLUÍDOS </p>
                 <div className='trackedProgress'>
-                    {trackedProgress.map(name => <ion-icon name={name} ></ion-icon>)}
+                    {trackedProgress.map((name, index) => <ion-icon key={index} name={name} ></ion-icon>)}
                 </div>
-             </ProgressBar>
+            </ProgressBar>
         </div>
     )
 }

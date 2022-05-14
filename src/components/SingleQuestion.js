@@ -1,7 +1,7 @@
 import React from "react";
 import turnArrow from '../assets/images/Vector.png'
 
-export default function SingleQuestion({ index, question, answer, setCounter, counter, addProgress}) {
+export default function SingleQuestion({ index, question, answer, addProgress,closeQuestion}) {
     const infoButtons = [{
         type:"wrong",
         name: "Não lembrei",
@@ -32,9 +32,9 @@ export default function SingleQuestion({ index, question, answer, setCounter, co
         setStatusCard(previousState => ({ ...previousState, showAnswer: true }));
     }
 
-    function closeCard(type) {
-        setCounter(counter+1);
-        addProgress(type)
+    function closeCard(type,question,Qindex) {
+        closeQuestion(question,Qindex); 
+        addProgress(type);
         switch (type) {
             case "wrong":
                 setStatusCard(previousState => ({
@@ -75,8 +75,8 @@ export default function SingleQuestion({ index, question, answer, setCounter, co
                     <>
                         <p>{answer}</p>
                         <span>
-                            {infoButtons.map((button, index) =>
-                                <button key={index} onClick={() => closeCard(button.type,status)} style={{ background: button.color }}>{button.name}</button>)}
+                            {infoButtons.map((button, Bindex) =>
+                                <button key={Bindex} onClick={() => closeCard(button.type,question,index)} style={{ background: button.color }}>{button.name}</button>)}
                         </span>
                     </>
                     :
