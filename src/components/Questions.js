@@ -2,6 +2,7 @@ import SingleQuestion from "./SingleQuestion"
 import React from "react";
 
 export default function Questions({ deck, progress }) {
+    
     const [closedQuestions,setClosedQuestions] = React.useState([])
 
     function closeQuestion(question,Qindex) {
@@ -37,8 +38,8 @@ export default function Questions({ deck, progress }) {
         <ul className="questions">
             {finalDeck.map((QetA, index) =>
                 <SingleQuestion
-                    closeQuestion={closeQuestion}
                     addProgress={progress}
+                    closeQuestion={closeQuestion}
                     key={index}
                     index={index}
                     question={QetA.question}

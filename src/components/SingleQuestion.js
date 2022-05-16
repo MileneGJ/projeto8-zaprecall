@@ -1,7 +1,7 @@
 import React from "react";
 import turnArrow from '../assets/images/Vector.png'
 
-export default function SingleQuestion({ index, question, answer, addProgress,closeQuestion}) {
+export default function SingleQuestion({ index, question, answer, addProgress, closeQuestion}) {
     const infoButtons = [{
         type:"wrong",
         name: "Não lembrei",
@@ -16,7 +16,7 @@ export default function SingleQuestion({ index, question, answer, addProgress,cl
         color: "#2FBE34"
     }];
 
-    const [statusCard, setStatusCard] = React.useState({
+    const [statusCard,setStatusCard] = React.useState({
         showCard: false,
         showAnswer: false,
         closed: false,
@@ -25,43 +25,46 @@ export default function SingleQuestion({ index, question, answer, addProgress,cl
     });
 
     function appearQuestion() {
-        setStatusCard(previousState => ({ ...previousState, showCard: true }));
+        setStatusCard({ ...statusCard, showCard: true });
     }
 
     function appearAnswer() {
-        setStatusCard(previousState => ({ ...previousState, showAnswer: true }));
+        setStatusCard({ ...statusCard, showAnswer: true });
     }
 
-    function closeCard(type,question,Qindex) {
-        closeQuestion(question,Qindex); 
+    function closeCard(type, question, Qindex) {
+        closeQuestion(question, Qindex);
         addProgress(type);
         switch (type) {
             case "wrong":
-                setStatusCard(previousState => ({
-                    ...previousState,
+                setStatusCard({
+                    ...statusCard,
                     showCard: false,
                     showAnswer: false,
                     closed: true
-                }));
+                });
+
                 break;
             case "almost":
-                setStatusCard(previousState => ({
-                    ...previousState,
+                setStatusCard({
+                    ...statusCard,
                     showCard: false,
                     showAnswer: false,
                     closed: true,
                     zap: true,
                     almost: true
-                }));
+                });
+
                 break;
             case "right":
-                setStatusCard(previousState => ({
-                    ...previousState,
+                setStatusCard({
+                    ...statusCard,
                     showCard: false,
                     showAnswer: false,
                     closed: true,
                     zap: true
-                }));
+                });
+
                 break;
             default:
                 break;

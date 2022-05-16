@@ -10,6 +10,7 @@ export default function App () {
     function appearContent(){
         setShowScreen(true);
     }
+
     return(
         <>
             {showScreen? <Content /> :<Welcome content={appearContent}/>}

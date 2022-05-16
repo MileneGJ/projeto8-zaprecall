@@ -19,12 +19,14 @@ export default function ProgressBar(props) {
                         <img src={sad} alt="" />
                         <h2>Putz...</h2>
                     </span>
-                    <p>Ainda faltam alguns... Mas não desanime!</p>
+                    <p>Ainda faltam alguns...<br/> Mas não desanime!</p>
                 </>
                 :
                 <></>
             }
             {props.children}
+
+            {props.result!==""? <button className="restart" onClick={props.restart} >REINICIAR RECALL</button>:<></>}
         </div>
     )
 }

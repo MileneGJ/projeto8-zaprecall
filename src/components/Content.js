@@ -30,25 +30,38 @@ export default function Content() {
         answer: "Dizer para o React quais informações quando atualizadas devem renderizar a tela novamente"
     }];
 
-    const [trackedProgress, setTrackedProgress] = React.useState([])
-    let progressArray = []
-    const [finalResult, setFinalResult] = React.useState("")
+    let progressArray = [];
+    let finalResult = "";
 
-    function addProgress(type) {
+    const [trackedProgress, setTrackedProgress] = React.useState({
+        progress: progressArray,
+        result: finalResult
+    })
+
+   function addProgress(type) {
         switch (type) {
             case "wrong":
-                progressArray=[...trackedProgress,"close-circle"];
-                setTrackedProgress(progressArray);
+                progressArray = [...trackedProgress.progress, "close-circle"];
+                setTrackedProgress({
+                    progress: progressArray,
+                    result: finalResult
+                });
                 verifyFinal()
                 break
             case "almost":
-                progressArray=[...trackedProgress,"help-circle"];
-                setTrackedProgress(progressArray);
+                progressArray = [...trackedProgress.progress, "help-circle"];
+                setTrackedProgress({
+                    progress: progressArray,
+                    result: finalResult
+                });
                 verifyFinal()
                 break
             case "right":
-                progressArray=[...trackedProgress,"checkmark-circle"];
-                setTrackedProgress(progressArray);
+                progressArray = [...trackedProgress.progress, "checkmark-circle"];
+                setTrackedProgress({
+                    progress: progressArray,
+                    result: finalResult
+                });
                 verifyFinal()
                 break
             default:
@@ -58,11 +71,28 @@ export default function Content() {
 
     function verifyFinal() {
         if (progressArray.length === deck.length && progressArray.includes("close-circle")) {
-            setFinalResult("negative");
+            finalResult = "negative";
+            setTrackedProgress({
+                progress: progressArray,
+                result: finalResult
+            });
         }
         if (progressArray.length === deck.length && !progressArray.includes("close-circle")) {
-            setFinalResult("positive");
+            finalResult = "positive";
+            setTrackedProgress({
+                progress: progressArray,
+                result: finalResult
+            });
         }
+    }
+
+    function restartRecall() {
+        progressArray = [];
+        finalResult = "";
+        setTrackedProgress({
+            progress: progressArray,
+            result: finalResult
+        });
     }
 
 
@@ -72,10 +102,10 @@ export default function Content() {
             <Questions
                 progress={addProgress}
                 deck={deck} />
-            <ProgressBar result={finalResult}>
-                <p>{trackedProgress.length}/{deck.length} CONCLUÍDOS </p>
+            <ProgressBar result={trackedProgress.result} restart={restartRecall}>
+                <p>{trackedProgress.progress.length}/{deck.length} CONCLUÍDOS </p>
                 <div className='trackedProgress'>
-                    {trackedProgress.map((name, index) => <ion-icon key={index} name={name} ></ion-icon>)}
+                    {trackedProgress.progress.map((name, index) => <ion-icon key={index} name={name} ></ion-icon>)}
                 </div>
             </ProgressBar>
         </div>
